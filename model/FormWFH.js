@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const formwfh = new mongoose.Schema({
-
     detail: { require: true, type: String },
     status: { require: true, type: Boolean },
     sdate: { require: true, type: Date },

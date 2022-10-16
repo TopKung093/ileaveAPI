@@ -22,7 +22,7 @@ module.exports.add_user = async (req, res) => {
             { user_id: user._id, username },
             process.env.TOKEN_KEY,
             {
-                expiresIn: "2h"
+                expiresIn: "30d"
             }
         )
         user.token = token;
@@ -65,11 +65,30 @@ module.exports.loginUser = async (req, res) => {
         console.log(err);
     }
 }
+module.exports.updateUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedData = req.body;
+        const options = { new: true };
+        const result = await leave.findByIdAndUpdate(
+            id, updatedData, options
+        )
+        res.send(result)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+}
 module.exports.logout = async (req, res) => {
     req.token = "";
     {
         req.token == "" ?
-            res.status(200).send('Plz Login').redirect('/login')
+            res.status(200).send('Plz Login again').redirect('/login')
             : res.status(400).send('Invalid')
     }
+}
+module.exports.deleteUser = async (req, res) => {
+    console.log(req.params)
+    let data = await leave.deleteOne(req.params);
+    res.send(data);
 }
