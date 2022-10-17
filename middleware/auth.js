@@ -9,7 +9,7 @@ const vertifyToken = (req,res,next)=>{
         const decoded = jwt.verify(token,config.TOKEN_KEY);
         req.user = decoded;
     }catch{
-        return res.status(401).send("Inalid Token");
+        return res.status(401).send("Invalid Token");
     }
     return next();
 }

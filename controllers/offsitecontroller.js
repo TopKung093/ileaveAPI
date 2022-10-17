@@ -1,6 +1,6 @@
 const offsite = require('../model/Offsite');
 module.exports.addOffsite = async (req, res) => {
-    const offsite = new offsite({
+    const offsiteNew = new offsite({
         location: req.body.location,
         detail: req.body.detail,
         date: req.body.date,
@@ -12,7 +12,7 @@ module.exports.addOffsite = async (req, res) => {
         user_id: req.body.user_id,
     })
     try {
-        const dataoffsiteToSave = await offsite.save();
+        const dataoffsiteToSave = await offsiteNew.save();
         res.status(200).json(dataoffsiteToSave)
     }
     catch (error) {

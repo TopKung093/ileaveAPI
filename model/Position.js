@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const Positiondata = new mongoose.Schema({
-      name: String
+      name:{ type: String}
 },{
       collection: 'Position',
       versionKey: false

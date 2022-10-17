@@ -1,18 +1,14 @@
 const workfromhome = require('../model/WorkFromHome');
 module.exports.addWFH = async (req, res) => {
-    const workfromhome = new workfromhome({
-        detail9: req.body.detail9,
-        datail13: req.body.detail13,
-        datail15: req.body.detail15,
-        date: req.body.data,
+    const wfhNew = new workfromhome({
+        datail: req.body.detail,
+        date: req.body.date,
         project: req.body.project,
         manager: req.body.manager,
-        note: req.body.note,
-        user_id: req.body.user_id,
-        position_id: req.body.position_id,
+        user_id: req.body.user_id
     })
     try {
-        const datawfhToSave = await workfromhome.save();
+        const datawfhToSave = await wfhNew.save();
         res.status(200).json(datawfhToSave)
     }
     catch (error) {

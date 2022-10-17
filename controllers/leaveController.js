@@ -1,20 +1,23 @@
 const leave = require('../model/Leave');
-module.exports.addLeave = async (req, res) => {
-    const leave = new leave({
+module.exports.add_leave = async (req, res) => {
+    const LeaveNew = new leave({
+        detail: req.body.detail,
         status: req.body.status,
-        sdate: req.body.sdate,
-        edate: req.body.edate,
+        dragDate: req.body.dragDate,
+        uptoDate: req.body.uptoDate,
+        approver: req.body.approver,
         user_id: req.body.user_id,
         ltype_id: req.body.ltype_id,
-    })
-    try {
-        const dataleaveToSave = await leave.save();
-        res.status(200).json(dataleaveToSave)
-    }
-    catch (error) {
-        res.status(400).json({ message: error.message })
+        image: req.body.image
+    });
+    try{
+        const saveLeave = await LeaveNew.save();
+        res.json(saveLeave);
+    }catch(err){
+        res.json({message:err});
     }
 }
+
 module.exports.getLeave = async (req, res) => {
     try {
         const data = await leave.find();

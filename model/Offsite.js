@@ -5,7 +5,7 @@ const offsitedata = new mongoose.Schema({
     location: { require: true, type: String },
     detail: { require: true, type: String },
     date: { require: true, type: Date },
-    time: { require: true, type: Date },
+    time: { require: true, type: String },
     to_distance: { type: Number, },
     return_distance: { type: Number, require: true },
     budget: { type: Number, require: true },

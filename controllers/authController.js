@@ -3,7 +3,19 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 module.exports.add_user = async (req, res) => {
     try {
-        const { name, lastname, username, password } = req.body;
+        const { user_id,
+            name,
+            lastname,
+            phone,
+            email,
+            sick_leave,
+            personal_leave,
+            vacation_leave,
+            username,
+            password,
+            role_id,
+            position_id,
+            department_id } = req.body;
         if (!(username && password && name && lastname)) {
             res.status(400).send("All input is required");
         }
@@ -13,10 +25,19 @@ module.exports.add_user = async (req, res) => {
         }
         encryptedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
+            user_id,
             name,
             lastname,
+            phone,
+            email,
+            sick_leave,
+            personal_leave,
+            vacation_leave,
             username,
-            password: encryptedPassword
+            password: encryptedPassword,
+            role_id,
+            position_id,
+            department_id
         })
         const token = jwt.sign(
             { user_id: user._id, username },
