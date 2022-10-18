@@ -1,7 +1,8 @@
 const auth = require('../controllers/authController');
 const leave = require('../controllers/leaveController');
-const position = require('../model/Position')
-const department = require('../model/Department')
+const position = require('../model/Position');
+const leavetype = require('../model/LeaveType');
+const department = require('../model/Department');
 const offsite = require('../controllers/offsitecontroller');
 const workfromhome = require('../controllers/wfhcontroller');
 const role = require('../model/Role');
@@ -17,7 +18,7 @@ router.post('/user/update/:id', auth.updateUser);
 router.delete('/user/delete/:id', auth.deleteUser);
 router.get('/logout', auth.logout);
 router.get('/leave', leave.getLeave);
-router.post('/leave/add', leave.add_leave);
+router.post('/leave/create', leave.add_leave);
 router.post('/leave/update/:id', leave.updateLeave);
 router.delete('/leave/delete/:id', leave.deleteLeave);
 router.get('/offsite', offsite.getOffsite);
@@ -49,6 +50,15 @@ router.get('/department', async (req,res)=>{
 router.get('/role', async (req,res)=>{
     try {
         const data = await role.find();
+        res.json(data);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+router.get('/leavetype', async (req,res)=>{
+    try {
+        const data = await leavetype.find();
         res.json(data);
     }
     catch (error) {

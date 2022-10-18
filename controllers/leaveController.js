@@ -1,3 +1,4 @@
+const { db } = require('../model/Leave');
 const leave = require('../model/Leave');
 module.exports.add_leave = async (req, res) => {
     const LeaveNew = new leave({
@@ -10,22 +11,42 @@ module.exports.add_leave = async (req, res) => {
         ltype_id: req.body.ltype_id,
         image: req.body.image
     });
-    try{
+    try {
         const saveLeave = await LeaveNew.save();
         res.json(saveLeave);
-    }catch(err){
-        res.json({message:err});
+    } catch (err) {
+        res.json({ message: err });
     }
 }
 
 module.exports.getLeave = async (req, res) => {
-    try {
-        const data = await leave.find();
-        res.json(data);
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    db.collection('Leave').aggregate(
+        [
+            {
+                $project: {
+                    _id: 1,
+                    detail: 1,
+                    status: 1,
+                    dragDate: { $dateToString: { format: "%d/%m/%Y", date: "$dragDate" } },
+                    uptoDate: { $dateToString: { format: "%d/%m/%Y", date: "$uptoDate" } },
+                    approver: 1,
+                    user_id: 1,
+                    ltype_id: 1,
+                    image: 1
+                }
+            }
+        ]
+    ).toArray((err, result) => {
+        if (err) return console.log(err);
+        res.send(result);
+    })
+    // try {
+    //     const data = await leave.find();
+    //     res.json(data);
+    // }
+    // catch (error) {
+    //     res.status(500).json({ message: error.message });
+    // }
 }
 module.exports.updateLeave = async (req, res) => {
     try {
