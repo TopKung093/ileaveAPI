@@ -1,6 +1,7 @@
 const User = require('../model/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { db } = require('../model/User');
 module.exports.add_user = async (req, res) => {
     try {
         const { user_id,
@@ -43,7 +44,7 @@ module.exports.add_user = async (req, res) => {
             { user_id: user._id, username },
             process.env.TOKEN_KEY,
             {
-                expiresIn: "30d"
+                expiresIn: "2d"
             }
         )
         user.token = token;
@@ -60,7 +61,39 @@ module.exports.getUser = async (req, res) => {
     catch (error) {
         res.status(500).json({ message: error.message });
     }
+    // db.collection('User').aggregate([
+    //     {
+    //         $lookup: {
+    //             from: 'Role',
+    //             localField: 'role_id',
+    //             foreignField: '_id',
+    //             as: 'role_id'
+    //         },
+    //     }, 
+    //     {
+    //         $lookup: {
+    //             from: 'Position',
+    //             localField: 'position_id',
+    //             foreignField: '_id',
+    //             as: 'position_id'
+    //         }
+    //     },
+    //     {
+    //         $lookup: {
+    //             from: 'Department',
+    //             localField: 'department_id',
+    //             foreignField: '_id',
+    //             as: 'department_id'
+    //         }
+    //     }
+
+    // ]).toArray((err, result) => {
+    //     if (err) return console.log(err);
+    //     res.send(result);
+    // })
 }
+
+
 module.exports.loginUser = async (req, res) => {
     try {
         const { username, password } = req.body;

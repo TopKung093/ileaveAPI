@@ -1,10 +1,15 @@
 const auth = require('../controllers/authController');
 const leave = require('../controllers/leaveController');
+const position = require('../model/Position')
+const department = require('../model/Department')
 const offsite = require('../controllers/offsitecontroller');
 const workfromhome = require('../controllers/wfhcontroller');
+const role = require('../model/Role');
+
+
+
 const express = require('express');                                                                                                            
 const router = express.Router();
-
 router.post("/user/add", auth.add_user);
 router.post("/login", auth.loginUser);
 router.get('/user', auth.getUser);
@@ -23,5 +28,31 @@ router.get('/wfh', workfromhome.getWFH);
 router.post('/wfh/add', workfromhome.addWFH);
 router.post('/wfh/update/:id', workfromhome.updateWFH);
 router.delete('/wfh/delete/:id', workfromhome.deleteWFH);
-
+router.get('/position', async (req,res)=>{
+    try {
+        const data = await position.find();
+        res.json(data);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+router.get('/department', async (req,res)=>{
+    try {
+        const data = await department.find();
+        res.json(data);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+router.get('/role', async (req,res)=>{
+    try {
+        const data = await role.find();
+        res.json(data);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 module.exports = router;
