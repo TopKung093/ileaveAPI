@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
     sick_leave: {type: Number},
     personal_leave: {type: Number},
     vacation_leave: {type:Number},
+    level: {type:String},
     username: { type: String, unique: true },
     password: { type: String },
     role_id: { type: Schema.Types.ObjectId,Ref: 'Role'},
@@ -18,6 +19,7 @@ const userSchema = new mongoose.Schema({
     token: { type: String }
 },{
     collection: 'User',
+    timestamps: true,
     versionKey: false
 });
 module.exports = mongoose.model('User', userSchema);

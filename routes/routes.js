@@ -11,7 +11,7 @@ const role = require('../model/Role');
 
 const express = require('express');                                                                                                            
 const router = express.Router();
-router.post("/user/add", auth.add_user);
+router.post("/user/create", auth.add_user);
 router.post("/login", auth.loginUser);
 router.get('/user', auth.getUser);
 router.post('/user/update/:id', auth.updateUser);

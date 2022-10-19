@@ -12,6 +12,7 @@ module.exports.add_user = async (req, res) => {
             sick_leave,
             personal_leave,
             vacation_leave,
+            level,
             username,
             password,
             role_id,
@@ -34,6 +35,7 @@ module.exports.add_user = async (req, res) => {
             sick_leave,
             personal_leave,
             vacation_leave,
+            level,
             username,
             password: encryptedPassword,
             role_id,
@@ -124,7 +126,7 @@ module.exports.updateUser = async (req, res) => {
         const id = req.params.id;
         const updatedData = req.body;
         const options = { new: true };
-        const result = await leave.findByIdAndUpdate(
+        const result = await User.findByIdAndUpdate(
             id, updatedData, options
         )
         res.send(result)
@@ -143,6 +145,6 @@ module.exports.logout = async (req, res) => {
 }
 module.exports.deleteUser = async (req, res) => {
     console.log(req.params)
-    let data = await leave.deleteOne(req.params);
+    let data = await User.deleteOne(req.params);
     res.send(data);
 }

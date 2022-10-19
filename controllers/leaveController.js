@@ -9,7 +9,7 @@ module.exports.add_leave = async (req, res) => {
         approver: req.body.approver,
         user_id: req.body.user_id,
         ltype_id: req.body.ltype_id,
-        image: req.body.image
+        number: req.body.number
     });
     try {
         const saveLeave = await LeaveNew.save();
@@ -29,10 +29,11 @@ module.exports.getLeave = async (req, res) => {
                     status: 1,
                     dragDate: { $dateToString: { format: "%d/%m/%Y", date: "$dragDate" } },
                     uptoDate: { $dateToString: { format: "%d/%m/%Y", date: "$uptoDate" } },
+                    number: 1,
                     approver: 1,
                     user_id: 1,
                     ltype_id: 1,
-                    image: 1
+                    createdAt: { $dateToString: { format: "%d/%m/%Y", date: "$createdAt" } },
                 }
             }
         ]
