@@ -102,7 +102,8 @@ module.exports.loginUser = async (req, res) => {
         if (!(username && password)) {
             res.status(400).send("All input is required");
         }
-        const user = await User.findOne({ username });
+        let user = await User.findOne({ username });
+        console.log('user in========>',user)
         if (user && (await bcrypt.compare(password, user.password))) {
             const token = jwt.sign(
                 {
@@ -114,7 +115,8 @@ module.exports.loginUser = async (req, res) => {
                 }
             )
             user.token = token;
-            res.status(200).json(user);
+            console.log('user========>',user)
+            res.status(200).json(JSON.stringify(user));
         }
         res.status(400).send('Invalid');
     } catch (err) {
