@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
     vacation_leave: {type:Number},
     level: {type:String},
     username: { type: String, unique: true },
+    active: {type: Boolean},
     password: { type: String },
     role_id: { type: Schema.Types.ObjectId,Ref: 'Role'},
     position_id: { type: Schema.Types.ObjectId,Ref: 'Position'},

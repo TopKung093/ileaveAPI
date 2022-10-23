@@ -4,7 +4,7 @@ const leaveSchema = new mongoose.Schema({
     detail: { require: true, type: String },
     status: { require: true,type: String },
     dragDate: { require: true, type: Date },
-    uptoDate: { require: true, type: Date },
+    uptoDate: { require: true, type: Date},
     number: { require: true,type: Number},
     approver: { require: true, type: String },
     user_id: { require: true, type: Schema.Types.ObjectId, Ref: 'User' },
