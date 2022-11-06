@@ -74,10 +74,10 @@ module.exports.getStatus = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
-module.exports.getUserStatus = async (req, res) => {
+module.exports.getPerson = async (req, res) => {
     try {
         const filter = {
-            user_id : req.params.id,
+            user_id: req.params.id,
             ltype_id: "633ed6ad77746afb52cb895a",
         }
         const result = await leave.find(filter);
@@ -90,7 +90,7 @@ module.exports.getUserStatus = async (req, res) => {
 module.exports.getSickStatus = async (req, res) => {
     try {
         const filter = {
-            user_id : req.params.id,
+            user_id: req.params.id,
             ltype_id: "633ed6d177746afb52cb895b",
         }
         const result = await leave.find(filter);
@@ -103,8 +103,51 @@ module.exports.getSickStatus = async (req, res) => {
 module.exports.getHolidayStatus = async (req, res) => {
     try {
         const filter = {
-            user_id : req.params.id,
+            user_id: req.params.id,
             ltype_id: "633ed68477746afb52cb8958",
+        }
+        const result = await leave.find(filter);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+module.exports.getPersonAccept = async (req, res) => {
+    try {
+        const filter = {
+            user_id: req.params.id,
+            ltype_id: "633ed6ad77746afb52cb895a",
+            status: "อนุมัติ"
+        }
+        const result = await leave.find(filter);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+module.exports.getSickAccept = async (req, res) => {
+    try {
+        const filter = {
+            user_id: req.params.id,
+            ltype_id: "633ed6d177746afb52cb895b",
+            status: "อนุมัติ"
+        }
+        const result = await leave.find(filter);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+module.exports.getSickUnaccept = async (req, res) => {
+    try {
+        const filter = {
+            user_id: req.params.id,
+            ltype_id: "633ed6d177746afb52cb895b",
+            status: "ไม่อนุมัติ"
         }
         const result = await leave.find(filter);
         res.json(result);
