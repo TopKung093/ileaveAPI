@@ -1,4 +1,5 @@
 const budget = require('../model/Budget');
+
 module.exports.addbudget = async (req, res) => {
     const budgetNew = new budget({
         travelby: req?.body?.travelby,
@@ -8,6 +9,8 @@ module.exports.addbudget = async (req, res) => {
         approver: req?.body?.approver,
         backward: req?.body?.backward,
         cash: req?.body?.cash,
+        tdetail: req?.body?.tdetail,
+        cashpb: req?.body?.cashpb,
         status: req?.body?.status,
         user_id: req?.body?.user_id,
     })
@@ -19,6 +22,7 @@ module.exports.addbudget = async (req, res) => {
         res.status(400).json({ message: error.message })
     }
 }
+
 module.exports.updateBudget = async (req, res) => {
     try {
         const id = req.params.id;

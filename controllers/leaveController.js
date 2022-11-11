@@ -113,6 +113,35 @@ module.exports.getHolidayStatus = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+module.exports.getHolidayAccept = async (req, res) => {
+    try {
+        const filter = {
+            user_id: req.params.id,
+            ltype_id: "633ed68477746afb52cb8958",
+            status: "อนุมัติ"
+        }
+        const result = await leave.find(filter);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+module.exports.getHolidayUnAccept = async (req, res) => {
+    try {
+        const filter = {
+            user_id: req.params.id,
+            ltype_id: "633ed68477746afb52cb8958",
+            status: "ไม่อนุมัติ"
+        }
+        const result = await leave.find(filter);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 module.exports.getPersonAccept = async (req, res) => {
     try {
@@ -128,6 +157,21 @@ module.exports.getPersonAccept = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+module.exports.getPersonUnAccept = async (req, res) => {
+    try {
+        const filter = {
+            user_id: req.params.id,
+            ltype_id: "633ed6ad77746afb52cb895a",
+            status: "ไม่อนุมัติ"
+        }
+        const result = await leave.find(filter);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 module.exports.getSickAccept = async (req, res) => {
     try {
         const filter = {

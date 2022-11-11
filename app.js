@@ -9,6 +9,8 @@ require('dotenv').config();
 const { API_PORT } = process.env;
 const port = process.env.PORT || API_PORT;
 
+
+
 app.use(routes);
 app.post('/welcome', auth, (req, res) => {
     res.status(200).send(`Welcome bro`);
