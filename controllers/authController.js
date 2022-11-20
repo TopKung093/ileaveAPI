@@ -5,11 +5,13 @@ const { db } = require('../model/User');
 module.exports.add_user = async (req, res) => {
     try {
         const { user_id,
+            prefix,
             name,
             lastname,
             phone,
             email,
             level,
+            startjob,
             active,
             username,
             password,
@@ -26,11 +28,13 @@ module.exports.add_user = async (req, res) => {
         encryptedPassword = await bcrypt.hash(password, 10);
         const user = await User.create({
             user_id,
+            prefix,
             name,
             lastname,
             phone,
             email,
             level,
+            startjob,
             active,
             username,
             password: encryptedPassword,

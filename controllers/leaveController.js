@@ -28,14 +28,15 @@ module.exports.getLeave = async (req, res) => {
                     _id: 1,
                     detail: 1,
                     status: 1,
-                    dragDate: { $dateToString: { format: "%d/%m/%Y", date: "$dragDate" } },
-                    uptoDate: { $dateToString: { format: "%d/%m/%Y", date: "$uptoDate" } },
+                    dragDate: { $dateToString: { format: "%d-%m-%Y", date: "$dragDate" } },
+                    uptoDate: { $dateToString: { format: "%d-%m-%Y", date: "$uptoDate" } },
                     number: 1,
                     approver: 1,
                     user_id: 1,
                     ltype_id: 1,
-                    createdAt: { $dateToString: { format: "%d/%m/%Y", date: "$createdAt" } },
-                }
+                    createdAt: { $dateToString: { format: "%d-%m-%Y", date: "$createdAt" } },
+                },
+               
             }
         ]
     ).toArray((err, result) => {

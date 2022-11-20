@@ -3,6 +3,7 @@ const leave = require('../controllers/leaveController');
 const regeneral = require('../controllers/regcontroller');
 const query = require('../controllers/querycontroller');
 const budget = require('../controllers/budgetcontroller');
+const authmiddleware = require('../middleware/auth');
 
 const express = require('express');
 const router = express.Router();
@@ -49,11 +50,11 @@ const router = express.Router();
 //router everything
 
 router.post("/user/create", auth.add_user);
-router.post("/login", auth.loginUser);
+router.post("/login",auth.loginUser);
 router.get('/user', auth.getUser);
 router.post('/user/update/:id', auth.updateUser);
 router.delete('/user/delete/:id', auth.deleteUser);
-router.get('/logout', auth.logout);
+router.post('/logout', auth.logout);
 
 router.get('/leave', leave.getLeave);
 router.get('/leave/pendding', leave.getStatus);

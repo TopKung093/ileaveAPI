@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new mongoose.Schema({
+    prefix: {type: String},
     user_id: {type: String},
     name: { type: String },
     lastname: { type: String },
@@ -11,6 +12,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, unique: true },
     active: {type: Boolean},
     password: { type: String },
+    startjob: {type: Date},
     role_id: { type: Schema.Types.ObjectId,Ref: 'Role'},
     position_id: { type: Schema.Types.ObjectId,Ref: 'Position'},
     department_id: {type: Schema.Types.ObjectId,Ref: 'Department'},
